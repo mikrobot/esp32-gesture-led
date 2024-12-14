@@ -10,7 +10,7 @@ leds = [Pin(pin, Pin.OUT) for pin in led_pins]
 
 while True:
     if uart.any():  
-        data = uart.read().decode('utf-8').strip()  # Lee los datos
+        data = uart.read().decode('utf-8').strip() 
         try:
             dedos_levantados = int(data)  
             print(f"Dedos levantados: {dedos_levantados}")
@@ -23,4 +23,4 @@ while True:
                     leds[i].off()  # Apaga el LED
         except ValueError:
             print("Comando no válido")
-    time.sleep(0.1)  # Espera un poco antes de revisar de nuevo
+    time.sleep(0.1) 
