@@ -1,4 +1,4 @@
-# LED control with gesture detection using ESP32 and MicroPython
+# LED Control With Gesture Detection Using ESP32 and MicroPython
 
 This project uses an ESP32 and MicroPython to control the LEDs using gestures. Each raised finger corresponds to a lit LED.
 
