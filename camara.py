@@ -4,7 +4,7 @@ import time
 import serial
 
 
-ser = serial.Serial('COM3', 115200)  
+ser = serial.Serial('COMX', 115200)  # CHANGE THE 'COMX' EXAMPLE COM3
 time.sleep(2)  
 
 
@@ -28,13 +28,13 @@ last_time = time.time()
 def contar_dedos(hand_landmarks):
     dedos_levantados = 0
     puntos = hand_landmarks.landmark
-    palma_x = puntos[0].x  # Coordenada X de la palma
+    palma_x = puntos[0].x 
 
-    # Detección del pulgar
+   
     if puntos[4].x > puntos[3].x if palma_x < puntos[0].x else puntos[4].x < puntos[3].x:
         dedos_levantados += 1
 
-    # Detección de los otros dedos
+    
     for i in [8, 12, 16, 20]:  # IDs de las puntas de los dedos
         if puntos[i].y < puntos[i - 2].y:  # Puntas por encima de las articulaciones
             dedos_levantados += 1
@@ -47,7 +47,7 @@ while True:
         print("Error al acceder a la cámara.")
         break
 
-    # Control de frecuencia de procesamiento
+   
     if time.time() - last_time < 1.0 / fps:
         continue
     last_time = time.time()
@@ -61,7 +61,7 @@ while True:
             dedos_levantados = contar_dedos(hand_landmarks)
             print(f"Dedos levantados: {dedos_levantados}")
 
-            # Enviar el número de dedos levantados al ESP32
+            
             ser.write(str(dedos_levantados).encode())
 
     cv2.imshow('Detección de Manos', frame)
